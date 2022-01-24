@@ -1,6 +1,7 @@
 #!/bin/bash
 # trojan-go一键安装脚本
 # Author: hijk<https://hijk.art>
+# original URL: https://s.hijk.art/trojan-go.sh
 
 
 RED="\033[31m"      # Error message
@@ -421,7 +422,7 @@ getCert() {
             systemctl start cron
             systemctl enable cron
         fi
-        curl -sL https://get.acme.sh | sh -s email=hijk.pw@protonmail.ch
+        curl -sL https://get.acme.sh | sh -s email=dantifer@gmail.com
         source ~/.bashrc
         ~/.acme.sh/acme.sh  --upgrade  --auto-upgrade
         ~/.acme.sh/acme.sh --set-default-ca --server letsencrypt
@@ -439,7 +440,7 @@ getCert() {
         ~/.acme.sh/acme.sh  --install-cert -d $DOMAIN --ecc \
             --key-file       $KEY_FILE  \
             --fullchain-file $CERT_FILE \
-            --reloadcmd     "systemctl restart nginx"
+            --reloadcmd     "systemctl restart trojan-go"
         [[ -f $CERT_FILE && -f $KEY_FILE ]] || {
             colorEcho $RED " 获取证书失败，请到 https://hijk.art 反馈"
             exit 1
