@@ -248,7 +248,7 @@ preinstall() {
 
 installV2ray() {
     colorEcho $BLUE 安装v2ray...
-    bash <(curl -sL ${V6_PROXY}https://raw.githubusercontent.com/hijkpw/scripts/master/goV2.sh)
+    bash <(curl -sL ${V6_PROXY}https://raw.githubusercontent.com/zfdang/scripts/main/v2ray_install.sh)
 
     if [ ! -f $CONFIG_FILE ]; then
         colorEcho $RED " $OS 安装V2ray失败，请到 https://hijk.art 网站反馈"
@@ -312,7 +312,7 @@ getCert() {
         ~/.acme.sh/acme.sh  --install-cert -d $DOMAIN --ecc \
             --key-file       $KEY_FILE  \
             --fullchain-file $CERT_FILE \
-            --reloadcmd     "systemctl restart nginx"
+            --reloadcmd     "systemctl restart v2ray"
         [[ -f $CERT_FILE && -f $KEY_FILE ]] || {
             colorEcho $RED " 获取证书失败，请到 https://hijk.art 反馈"
             exit 1
