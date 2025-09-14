@@ -26,22 +26,33 @@ echo "systemd-resolved 已更新为: $TARGET_DNS"
 
 echo ""
 echo "=== 检查并修改 Netplan 配置 ==="
-for f in /etc/netplan/*.yaml; do
-    echo "处理 $f ..."
-    # 禁用 DHCP 下发的 DNS
-    if grep -q "dhcp4:" $f; then
-        sudo sed -i "s/dhcp4: *yes/dhcp4: yes\n      dhcp4-overrides:\n        use-dns: false/" $f
-    fi
-    # 添加或修改 nameservers
-    if grep -q "nameservers:" $f; then
-        sudo sed -i "/nameservers:/,/^[^ ]/ s/addresses:.*/addresses: [8.8.8.8, 1.1.1.1]/" $f
-    else
-        sudo sed -i "/dhcp4: yes/a \      nameservers:\n        addresses: [8.8.8.8, 1.1.1.1]" $f
-    fi
+for NETPLAN_FILE in /etc/netplan/*.yaml; do
+    echo "处理文件: $NETPLAN_FILE"
+
+    BACKUP_FILE="${NETPLAN_FILE}.bak.${DATE_TAG}"
+    echo "  -> 备份到: $BACKUP_FILE"
+    sudo cp "$NETPLAN_FILE" "$BACKUP_FILE"
+
+    echo "  -> 清理旧的 nameservers..."
+    sudo sed -i '/nameservers:/,/^[^ ]/d' "$NETPLAN_FILE"
+
+    echo "  -> 插入新的 DNS..."
+    sudo awk -v dns="$TARGET_DNS" '
+    /set-name:/ {
+        print $0
+        print "      nameservers:"
+        print "        addresses: " dns
+        next
+    }
+    {print}
+    ' "$NETPLAN_FILE" | sudo tee "$NETPLAN_FILE.tmp" >/dev/null
+
+    sudo mv "$NETPLAN_FILE.tmp" "$NETPLAN_FILE"
 done
 
 echo "应用 Netplan 配置..."
 sudo netplan apply
+
 
 echo ""
 echo "=== 当前 DNS 配置 ==="
