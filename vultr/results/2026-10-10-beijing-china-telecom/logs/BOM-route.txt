@@ -1,0 +1,47 @@
+$ /opt/homebrew/bin/nexttrace -4 -M -C -m 30 -q 3 --timeout 1000 65.20.66.100
+
+NextTrace 1.7.1 2026-06-16T02:54:57Z Homebrew
+[NextTrace API] preferred API IP - 209.209.59.214 - 188.81ms - DMIT.NRT
+IP Geo Data Provider: LeoMoeAPI
+[LAN_SOURCE] -> 65.20.66.100, 30 hops max, 28 byte packets, ICMP mode
+1   [LAN_GATEWAY]     *                         RFC1918
+                                              13.24 ms / 3.81 ms / 6.52 ms
+2   [CGNAT_GATEWAY]     *                         RFC6598
+                                              23.21 ms / 5.54 ms / 5.94 ms
+3   *
+4   *
+5   202.97.34.158   AS4134   [CHINANET-BB]    中国 北京   en.chinatelecom.com.cn  电信
+                                              8.72 ms / * ms / * ms
+6   202.97.12.58    AS4134   [CHINANET-BB]    中国 北京  I-X en.chinatelecom.com.cn  电信
+                                              7.91 ms / * ms / * ms
+7   202.97.89.50    AS4134   [CHINANET-BB]    中国 香港   en.chinatelecom.com.cn  电信
+                                              42.48 ms / * ms / * ms
+8   203.22.178.197  *        [CTG-CN]         德国 黑森 美因河畔法兰克福
+    ctcn2.de.frk.ctgnet                       49.07 ms / 47.19 ms / 46.16 ms
+9   180.87.169.44   AS6453   [TATA-COMMUNICATIONS] 中国 香港   tatacommunications.com
+    ix-be-20.ecore1.hk2-hongkong.as6453.net   186.88 ms / 185.57 ms / 185.31 ms
+10  180.87.168.60   AS6453   [TATA-COMMUNICATIONS] 中国 香港   tatacommunications.com
+    if-bundle-9-2.qcore2.hk2-hongkong.as6453.net   205.45 ms / * ms / * ms
+    [MPLS: Lbl 863, TC 1, S 1, TTL 1]
+11  180.87.168.129  AS6453   [TATA-COMMUNICATIONS] 新加坡    tatacommunications.com
+    if-bundle-7-242.qcore2.svw-singapore.as6453.net   209.08 ms / * ms / * ms
+    [MPLS: Lbl 463636, TC 1, S 1, TTL 1]
+12  209.58.82.128   AS6453   [TATAC-ARIN]     新加坡    tatacommunications.com
+    if-bundle-2-2.qcore1.svw-singapore.as6453.net   209.07 ms / * ms / * ms
+    [MPLS: Lbl 487720, TC 1, S 1, TTL 1]
+13  209.58.82.130   AS6453   [TATAC-ARIN]     新加坡    tatacommunications.com
+    if-ae-33-2.tcore1.svw-singapore.as6453.net   211.37 ms / 213.04 ms / 211.88 ms
+14  180.87.12.34    AS6453   [TATA-COMMUNICATIONS] 新加坡    tatacommunications.com
+                                              253.21 ms / 252.05 ms / 251.06 ms
+15  172.28.118.238  *                         RFC1918
+                                              248.21 ms / 247.91 ms / 247.82 ms
+    [MPLS: Lbl 0, TC 1, S 1, TTL 255]
+16  172.28.177.230  *                         RFC1918
+                                              255.23 ms / * ms / * ms
+17  121.241.56.170  AS4755   [TATACOMM-IN]    印度 马哈拉施特拉邦 孟买  tatacommunications.com
+                                              251.80 ms / 251.90 ms / 252.58 ms
+18  *
+19  *
+20  *
+21  65.20.66.100    AS20473                   印度 马哈拉施特拉邦 孟买  vultr.com
+    65.20.66.100.vultrusercontent.com         269.75 ms / 268.49 ms / 268.84 ms

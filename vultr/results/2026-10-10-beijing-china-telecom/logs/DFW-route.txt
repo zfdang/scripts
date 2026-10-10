@@ -1,0 +1,44 @@
+$ /opt/homebrew/bin/nexttrace -4 -M -C -m 30 -q 3 --timeout 1000 108.61.224.175
+
+NextTrace 1.7.1 2026-06-16T02:54:57Z Homebrew
+[NextTrace API] preferred API IP - 209.209.59.214 - 191.37ms - DMIT.NRT
+IP Geo Data Provider: LeoMoeAPI
+[LAN_SOURCE] -> 108.61.224.175, 30 hops max, 28 byte packets, ICMP mode
+1   [LAN_GATEWAY]     *                         RFC1918
+                                              7.06 ms / 2.26 ms / 2.41 ms
+2   [CGNAT_GATEWAY]     *                         RFC6598
+                                              18.70 ms / 9.87 ms / 6.79 ms
+3   *
+4   *
+5   202.97.61.222   AS4134   [CHINANET-BB]    中国 北京   en.chinatelecom.com.cn  电信
+                                              8.27 ms / * ms / * ms
+6   *
+7   202.97.93.138   AS4134   [CHINANET-BB]    美国 加利福尼亚 洛杉矶 北京 → 洛杉矶 en.chinatelecom.com.cn  电信
+                                              161.99 ms / 162.45 ms / 161.31 ms
+8   62.115.185.212  AS1299   [ARELION-NET]    美国 加利福尼亚 洛杉矶  arelion.com
+    lax-b22-link.ip.twelve99.net              163.85 ms / 162.89 ms / 163.41 ms
+9   62.115.140.156  AS1299   [ARELION-NET]    美国 加利福尼亚 洛杉矶  arelion.com
+    lax-bb2-link.ip.twelve99.net              162.66 ms / 162.73 ms / 165.25 ms
+    [MPLS: Lbl 403080, TC 0, S 1, TTL 1]
+10  62.115.137.206  AS1299   [ARELION-NET]    美国 加利福尼亚 帕洛阿托  arelion.com
+    palo-bb4-link.ip.twelve99.net             166.98 ms / 169.26 ms / 168.32 ms
+    [MPLS: Lbl 403080, TC 0, S 1, TTL 1]
+11  62.115.139.113  AS1299   [ARELION-NET]    美国 科罗拉多 丹佛  arelion.com
+                                              191.68 ms / 185.04 ms / 184.53 ms
+    [MPLS: Lbl 403080, TC 0, S 1, TTL 1]
+12  62.115.137.115  AS1299   [ARELION-NET]    美国 密苏里 堪萨斯城  arelion.com
+    kanc-bb2-link.ip.twelve99.net             200.34 ms / 199.27 ms / 200.09 ms
+    [MPLS: Lbl 403080, TC 0, S 1, TTL 1]
+13  62.115.139.189  AS1299   [ARELION-NET]    美国 德克萨斯 达拉斯  arelion.com
+    dls-b23-link.ip.twelve99.net              210.51 ms / 210.00 ms / 210.94 ms
+    [MPLS: Lbl 403080, TC 0, S 1, TTL 1]
+14  62.115.139.131  AS1299   [ARELION-NET]    美国 德克萨斯 达拉斯  arelion.com
+                                              219.60 ms / 219.13 ms / 221.84 ms
+15  62.115.149.45   AS1299   [ARELION-NET]    美国 德克萨斯州 达拉斯  arelion.com
+    constantcompany-ic-375790.ip.twelve99-cust.net   250.54 ms / 251.31 ms / 258.10 ms
+16  *
+17  *
+18  108.61.108.34   AS20473  [CONSTANT]       美国 德克萨斯州 达拉斯  vultr.com
+                                              258.20 ms / 258.15 ms / 257.71 ms
+19  108.61.224.175  AS20473  [CONSTANT]       美国 德克萨斯州 达拉斯  vultr.com
+                                              250.47 ms / 249.75 ms / 249.87 ms

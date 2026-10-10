@@ -1,0 +1,31 @@
+$ /opt/homebrew/bin/nexttrace -4 -M -C -m 30 -q 3 --timeout 1000 104.156.244.232
+
+NextTrace 1.7.1 2026-06-16T02:54:57Z Homebrew
+[NextTrace API] preferred API IP - 103.117.102.27 - 181.88ms - DMIT.NRT
+IP Geo Data Provider: LeoMoeAPI
+[LAN_SOURCE] -> 104.156.244.232, 30 hops max, 28 byte packets, ICMP mode
+1   [LAN_GATEWAY]     *                         RFC1918
+                                              6.90 ms / 3.28 ms / 3.91 ms
+2   [CGNAT_GATEWAY]     *                         RFC6598
+                                              5.46 ms / 5.59 ms / 5.98 ms
+3   36.112.253.253  AS4847                    中国 北京市   中国电信  电信
+                                              6.98 ms / * ms / * ms
+4   *
+5   202.97.53.18    AS4134   [CHINANET-BB]    中国 北京   en.chinatelecom.com.cn  电信
+                                              22.42 ms / 24.70 ms / 24.22 ms
+6   202.97.53.74    AS4134   [CHINANET-BB]    中国 北京   en.chinatelecom.com.cn  电信
+                                              8.33 ms / 8.80 ms / 8.00 ms
+7   202.97.59.106   AS4134   [CHINANET-BB]    美国 加利福尼亚 圣何塞 北京 → 圣何塞 en.chinatelecom.com.cn  电信
+                                              147.89 ms / 146.33 ms / 148.29 ms
+8   218.30.54.201   AS4134   [CHINANET-US]    美国 加利福尼亚 圣何塞  en.chinatelecom.com.cn
+                                              153.18 ms / 150.75 ms / 152.71 ms
+9   213.200.113.150 AS3257   [GTT-EU]         美国 佛罗里达州 迈阿密  gtt.net
+    ae16.cr8-mia1.ip4.gtt.net                 238.01 ms / 242.46 ms / 229.17 ms
+10  72.29.200.45    AS3257                    美国 佛罗里达州 迈阿密  gtt.net
+                                              222.22 ms / 226.63 ms / 222.69 ms
+11  *
+12  *
+13  144.202.32.37   AS20473                   美国 佛罗里达州 迈阿密  vultr.com
+                                              224.42 ms / 223.31 ms / 224.32 ms
+14  104.156.244.232 AS20473                   美国 佛罗里达州 迈阿密  vultr.com
+                                              234.97 ms / 234.24 ms / 234.88 ms

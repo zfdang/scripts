@@ -1,0 +1,10 @@
+$ /sbin/ping -n -c 3 -W 1000 108.61.219.200
+
+PING 108.61.219.200 (108.61.219.200): 56 data bytes
+64 bytes from 108.61.219.200: icmp_seq=0 ttl=50 time=193.301 ms
+64 bytes from 108.61.219.200: icmp_seq=1 ttl=50 time=164.319 ms
+64 bytes from 108.61.219.200: icmp_seq=2 ttl=50 time=163.045 ms
+
+--- 108.61.219.200 ping statistics ---
+3 packets transmitted, 3 packets received, 0.0% packet loss
+round-trip min/avg/max/stddev = 163.045/173.555/193.301/13.972 ms

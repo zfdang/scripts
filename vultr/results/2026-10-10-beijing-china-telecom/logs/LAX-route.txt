@@ -1,0 +1,37 @@
+$ /opt/homebrew/bin/nexttrace -4 -M -C -m 30 -q 3 --timeout 1000 108.61.219.200
+
+NextTrace 1.7.1 2026-06-16T02:54:57Z Homebrew
+[NextTrace API] preferred API IP - 45.88.195.154 - 181.77ms - DMIT.NRT
+IP Geo Data Provider: LeoMoeAPI
+[LAN_SOURCE] -> 108.61.219.200, 30 hops max, 28 byte packets, ICMP mode
+1   [LAN_GATEWAY]     *                         RFC1918
+                                              7.87 ms / 3.55 ms / 5.43 ms
+2   [CGNAT_GATEWAY]     *                         RFC6598
+                                              22.03 ms / 6.48 ms / 5.92 ms
+3   219.141.145.9   AS4847   [CHINATELECOM-BJ] 中国 北京市   中国电信  电信
+                                              6.49 ms / * ms / * ms
+4   *
+5   202.97.48.210   AS4134   [CHINANET-BB]    中国 北京   en.chinatelecom.com.cn  电信
+                                              22.13 ms / 21.00 ms / 25.81 ms
+6   202.97.12.134   AS4134   [CHINANET-BB]    中国 北京   en.chinatelecom.com.cn  电信
+                                              8.97 ms / 8.79 ms / 8.43 ms
+7   202.97.51.193   AS4134   [CHINANET-BB]    美国 加利福尼亚 圣何塞  en.chinatelecom.com.cn  电信
+                                              193.64 ms / 154.83 ms / 148.53 ms
+8   218.30.54.182   AS4134   [CHINANET-US]    美国 加利福尼亚 圣何塞 CT-Telia-PoP en.chinatelecom.com.cn  电信
+                                              155.99 ms / 158.66 ms / 157.38 ms
+9   62.115.139.116  AS1299   [ARELION-NET]    美国 加利福尼亚 帕洛阿托  arelion.com
+    palo-bb4-link.ip.twelve99.net             177.95 ms / 162.85 ms / 163.96 ms
+    [MPLS: Lbl 413550, TC 0, S 1, TTL 1]
+10  62.115.137.207  AS1299   [ARELION-NET]    美国 加利福尼亚 洛杉矶  arelion.com
+    lax-bb2-link.ip.twelve99.net              165.19 ms / 159.48 ms / * ms
+    [MPLS: Lbl 413550, TC 0, S 1, TTL 1]
+11  62.115.126.249  AS1299   [ARELION-NET]    美国 加利福尼亚 洛杉矶  arelion.com
+    lax-b3-link.ip.twelve99.net               176.53 ms / 172.60 ms / 172.44 ms
+12  62.115.149.37   AS1299   [ARELION-NET]    美国 加利福尼亚 洛杉矶  arelion.com
+    constantcompany-ic-375793.ip.twelve99-cust.net   172.34 ms / 172.83 ms / 173.59 ms
+13  *
+14  *
+15  173.199.80.241  AS20473                   美国 加利福尼亚州 洛杉矶  vultr.com
+    173.199.80.241.vultrusercontent.com       233.47 ms / 238.88 ms / 233.20 ms
+16  108.61.219.200  AS20473  [CONSTANT]       美国 加利福尼亚 洛杉矶  vultr.com
+    108.61.219.200.vultrusercontent.com       164.96 ms / 163.32 ms / 162.74 ms

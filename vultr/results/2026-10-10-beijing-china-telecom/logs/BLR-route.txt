@@ -1,0 +1,46 @@
+$ /opt/homebrew/bin/nexttrace -4 -M -C -m 30 -q 3 --timeout 1000 139.84.130.100
+
+NextTrace 1.7.1 2026-06-16T02:54:57Z Homebrew
+[NextTrace API] preferred API IP - 103.117.102.27 - 180.78ms - DMIT.NRT
+IP Geo Data Provider: LeoMoeAPI
+[LAN_SOURCE] -> 139.84.130.100, 30 hops max, 28 byte packets, ICMP mode
+1   [LAN_GATEWAY]     *                         RFC1918
+                                              7.43 ms / 4.89 ms / 2.09 ms
+2   [CGNAT_GATEWAY]     *                         RFC6598
+                                              5.76 ms / 4.62 ms / 4.78 ms
+3   219.141.145.9   AS4847   [CHINATELECOM-BJ] 中国 北京市   中国电信  电信
+                                              6.01 ms / 6.06 ms / 8.88 ms
+4   *
+5   *
+6   202.97.55.214   AS4134   [CHINANET-BB]    中国 北京   en.chinatelecom.com.cn
+                                              9.85 ms / 8.50 ms / * ms
+7   202.97.93.138   AS4134   [CHINANET-BB]    美国 加利福尼亚 洛杉矶 北京 → 洛杉矶 en.chinatelecom.com.cn  电信
+                                              160.33 ms / 160.85 ms / 160.19 ms
+8   *
+9   180.87.151.40   AS6453   [TATA-COMMUNICATIONS] 日本 千叶   tatacommunications.com
+    if-bundle-6-2.qcore2.kv8-chiba.as6453.net   364.62 ms / * ms / * ms
+    [MPLS: Lbl 1384, TC 1, S 1, TTL 1]
+10  *
+11  180.87.36.16    AS6453   [TATA-COMMUNICATIONS] 印度 泰米尔纳德邦 金奈  tatacommunications.com
+                                              367.54 ms / 370.29 ms / * ms
+    [MPLS: Lbl 1506, TC 1, S 1, TTL 1]
+12  180.87.36.195   AS6453   [TATA-COMMUNICATIONS] 印度 泰米尔纳德邦 金奈  tatacommunications.com
+    if-bundle-2-2.qcore2.cxr-chennai.as6453.net   329.63 ms / * ms / * ms
+    [MPLS: Lbl 339, TC 1, S 1, TTL 1]
+13  180.87.37.115   AS6453   [TATA-COMMUNICATIONS] 印度 泰米尔纳德邦 金奈  tatacommunications.com
+    if-ae-22-2.tcore2.cxr-chennai.as6453.net   383.05 ms / 382.90 ms / 382.23 ms
+14  180.87.37.2     AS6453   [TATA-COMMUNICATIONS] 印度 泰米尔纳德邦 钦奈  tatacommunications.com
+                                              373.92 ms / 378.69 ms / 372.16 ms
+15  172.25.133.69   *                         RFC1918
+                                              379.69 ms / 380.19 ms / 379.88 ms
+    [MPLS: Lbl 0, TC 1, S 1, TTL 254]
+16  172.25.199.133  *                         RFC1918
+                                              370.15 ms / 369.57 ms / 370.19 ms
+    [MPLS: Lbl 0, TC 1, S 1, TTL 255]
+17  115.117.125.130 AS4755   [TATACOMM-IN]    印度 马哈拉施特拉 孟买  tatacommunications.com
+                                              374.17 ms / 376.06 ms / 374.03 ms
+18  *
+19  *
+20  *
+21  139.84.130.100  AS20473  [CONSTANT]       印度 卡纳塔克邦 多德巴尔拉普尔  vultr.com
+                                              380.06 ms / 379.40 ms / 380.74 ms

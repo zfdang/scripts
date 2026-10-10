@@ -1,0 +1,31 @@
+$ /opt/homebrew/bin/nexttrace -4 -M -C -m 30 -q 3 --timeout 1000 104.156.230.107
+
+NextTrace 1.7.1 2026-06-16T02:54:57Z Homebrew
+[NextTrace API] preferred API IP - 209.209.59.214 - 183.35ms - DMIT.NRT
+IP Geo Data Provider: LeoMoeAPI
+[LAN_SOURCE] -> 104.156.230.107, 30 hops max, 28 byte packets, ICMP mode
+1   [LAN_GATEWAY]     *                         RFC1918
+                                              10.07 ms / 2.85 ms / 5.10 ms
+2   [CGNAT_GATEWAY]     *                         RFC6598
+                                              5.21 ms / 6.78 ms / 4.82 ms
+3   *
+4   *
+5   *
+6   202.97.54.14    AS4134   [CHINANET-BB]    中国 北京   en.chinatelecom.com.cn  电信
+                                              8.63 ms / 9.73 ms / * ms
+7   202.97.33.93    AS4134   [CHINANET-BB]    美国 加利福尼亚 圣何塞  en.chinatelecom.com.cn  电信
+                                              172.76 ms / 171.19 ms / 170.73 ms
+8   *
+9   154.54.169.65   AS174    [COGENT-BONE]    美国 加利福尼亚 圣何塞  cogentco.com
+    be6016.ccr82.sjc13.atlas.cogentco.com     183.58 ms / 170.34 ms / * ms
+10  154.54.170.198  AS174    [COGENT-BONE]    美国 加利福尼亚 圣何塞  cogentco.com
+    be8168.rcr51.b034314-0.sjc13.atlas.cogentco.com   166.53 ms / 166.14 ms / * ms
+11  38.120.133.35   AS174                     美国 加利福尼亚州 圣克拉拉  cogentco.com
+                                              168.74 ms / 170.06 ms / 170.18 ms
+12  *
+13  *
+14  *
+15  45.32.142.126   AS20473                   美国 加利福尼亚州 圣克拉拉  vultr.com
+                                              232.02 ms / 231.98 ms / * ms
+16  104.156.230.107 AS20473  [NET-104]        美国 加利福尼亚 圣何塞  vultr.com
+                                              163.54 ms / 162.96 ms / 161.43 ms
