@@ -1,0 +1,31 @@
+$ /opt/homebrew/bin/nexttrace -4 -M -C -m 30 -q 3 --timeout 1000 141.164.34.61
+
+NextTrace 1.7.1 2026-06-16T02:54:57Z Homebrew
+[NextTrace API] preferred API IP - 103.117.102.27 - 182.74ms - DMIT.NRT
+IP Geo Data Provider: LeoMoeAPI
+[LAN_SOURCE] -> 141.164.34.61, 30 hops max, 28 byte packets, ICMP mode
+1   [LAN_GATEWAY]     *                         RFC1918
+                                              6.59 ms / 3.68 ms / 3.85 ms
+2   [CGNAT_GATEWAY]     *                         RFC6598
+                                              5.14 ms / 14.57 ms / 5.59 ms
+3   36.112.175.185  AS4847                    中国 北京市   中国电信  电信
+                                              7.13 ms / * ms / * ms
+4   219.141.152.61  AS4847   [CHINATELECOM-BJ] 中国 北京   中国国家网络交换中心
+                                              6.55 ms / * ms / * ms
+5   202.97.61.146   AS4134   [CHINANET-BB]    中国 北京   en.chinatelecom.com.cn
+                                              19.70 ms / * ms / * ms
+6   202.97.54.14    AS4134   [CHINANET-BB]    中国 北京   en.chinatelecom.com.cn  电信
+                                              8.05 ms / * ms / * ms
+7   203.215.237.138 *        [CHINANET-FJ]    中国 福建省 厦门市   电信
+                                              123.87 ms / 130.65 ms / * ms
+8   *
+9   *
+10  129.250.2.98    AS2914   [NTT-BACKBONE]   韩国 首尔特别市 首尔  gin.ntt.net
+    ae-2.a00.seolko02.kr.bb.gin.ntt.net       103.70 ms / 105.38 ms / * ms
+11  61.251.96.126   AS2914                    韩国 首尔特别市 首尔  gin.ntt.net
+    ce-1-1-c18-1.a00.seolko02.kr.ce.gin.ntt.net   137.45 ms / * ms / * ms
+12  *
+13  *
+14  *
+15  141.164.34.61   AS20473  [KOR_VULTR_CUST] 韩国 首尔特别市 首尔  vultr.com
+                                              241.85 ms / 245.07 ms / * ms

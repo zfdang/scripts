@@ -1,0 +1,29 @@
+$ /opt/homebrew/bin/nexttrace -4 -M -C -m 30 -q 3 --timeout 1000 70.34.194.86
+
+NextTrace 1.7.1 2026-06-16T02:54:57Z Homebrew
+[NextTrace API] preferred API IP - 45.131.71.225 - 191.60ms - DMIT.NRT
+IP Geo Data Provider: LeoMoeAPI
+[LAN_SOURCE] -> 70.34.194.86, 30 hops max, 28 byte packets, ICMP mode
+1   [LAN_GATEWAY]     *                         RFC1918
+                                              15.56 ms / 2.86 ms / 3.73 ms
+2   [CGNAT_GATEWAY]     *                         RFC6598
+                                              6.06 ms / 6.22 ms / 5.94 ms
+3   *
+4   *
+5   *
+6   202.97.55.214   AS4134   [CHINANET-BB]    中国 北京   en.chinatelecom.com.cn
+                                              8.82 ms / 8.93 ms / * ms
+7   202.97.43.34    AS4134   [CHINANET-BB]    德国 黑森 美因河畔法兰克福  en.chinatelecom.com.cn  电信
+                                              146.86 ms / 146.97 ms / 144.78 ms
+8   81.173.21.42    AS4134                    德国 黑森州 美因河畔法兰克福  en.chinatelecom.com.cn  电信
+                                              163.41 ms / 161.57 ms / * ms
+9   63.220.69.46    AS3491                    瑞典 斯德哥尔摩省 斯德哥尔摩  pccwglobal.com
+    be43.br03.stk01.as3491.net                179.31 ms / 178.51 ms / 179.23 ms
+10  63.218.81.14    AS3491   [PCCW-BACKBONE]  瑞典 斯德哥尔摩省 斯德哥尔摩  pccwglobal.com
+                                              171.96 ms / 172.99 ms / 173.71 ms
+11  *
+12  *
+13  70.34.192.142   AS20473                   瑞典 斯德哥尔摩省 斯德哥尔摩  vultr.com
+                                              172.40 ms / 173.34 ms / 173.74 ms
+14  70.34.194.86    AS20473                   瑞典 斯德哥尔摩省 斯德哥尔摩  vultr.com
+                                              181.85 ms / 180.94 ms / 181.60 ms

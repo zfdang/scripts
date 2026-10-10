@@ -1,0 +1,58 @@
+$ /opt/homebrew/bin/nexttrace -4 -M -C -m 30 -q 3 --timeout 1000 108.61.196.101
+
+NextTrace 1.7.1 2026-06-16T02:54:57Z Homebrew
+[NextTrace API] preferred API IP - 209.209.59.214 - 182.63ms - DMIT.NRT
+IP Geo Data Provider: LeoMoeAPI
+[LAN_SOURCE] -> 108.61.196.101, 30 hops max, 28 byte packets, ICMP mode
+1   [LAN_GATEWAY]     *                         RFC1918
+                                              10.02 ms / 4.77 ms / 3.78 ms
+2   [CGNAT_GATEWAY]     *                         RFC6598
+                                              18.73 ms / 5.37 ms / 6.27 ms
+3   36.112.241.29   AS4847                    中国 北京市   中国电信  电信
+                                              10.99 ms / * ms / * ms
+4   *
+5   *
+6   202.97.12.58    AS4134   [CHINANET-BB]    中国 北京  I-X en.chinatelecom.com.cn  电信
+                                              9.85 ms / 9.03 ms / * ms
+7   202.97.41.50    AS4134   [CHINANET-BB]    美国 加利福尼亚 洛杉矶  en.chinatelecom.com.cn  电信
+                                              166.38 ms / * ms / * ms
+8   62.115.185.212  AS1299   [ARELION-NET]    美国 加利福尼亚 洛杉矶  arelion.com
+    lax-b22-link.ip.twelve99.net              166.79 ms / 166.39 ms / 166.09 ms
+9   62.115.140.226  AS1299   [ARELION-NET]    美国 加利福尼亚 洛杉矶  arelion.com
+    lax-bb1-link.ip.twelve99.net              168.65 ms / 173.13 ms / 169.02 ms
+    [MPLS: Lbl 402970, TC 0, S 1, TTL 1]
+10  62.115.139.151  AS1299   [ARELION-NET]    美国 加利福尼亚 圣何塞  arelion.com
+    sjo-bb3-link.ip.twelve99.net              299.98 ms / 302.78 ms / * ms
+    [MPLS: Lbl 24929, TC 0, S 0, TTL 1]
+    [MPLS: Lbl 402970, TC 0, S 1, TTL 1]
+11  62.115.139.105  AS1299   [ARELION-NET]    美国 科罗拉多 丹佛  arelion.com
+    den-bb1-link.ip.twelve99.net              214.48 ms / 212.34 ms / * ms
+    [MPLS: Lbl 149164, TC 0, S 0, TTL 1]
+    [MPLS: Lbl 402970, TC 0, S 1, TTL 2]
+12  62.115.115.77   AS1299   [ARELION-NET]    美国 伊利诺伊 芝加哥  arelion.com
+    chi-bb1-link.ip.twelve99.net              285.83 ms / 291.26 ms / 286.89 ms
+    [MPLS: Lbl 24488, TC 0, S 0, TTL 1]
+    [MPLS: Lbl 402970, TC 0, S 1, TTL 3]
+13  62.115.139.32   AS1299   [ARELION-NET]    美国 纽约 纽约  arelion.com
+    nyk-bb5-link.ip.twelve99.net              232.11 ms / 232.36 ms / 232.63 ms
+    [MPLS: Lbl 24465, TC 0, S 0, TTL 1]
+    [MPLS: Lbl 402970, TC 0, S 1, TTL 4]
+14  62.115.139.35   AS1299   [ARELION-NET]    瑞典 斯德哥尔摩省 斯德哥尔摩  arelion.com
+    rest-bb1-link.ip.twelve99.net             244.93 ms / 245.71 ms / 245.07 ms
+    [MPLS: Lbl 402970, TC 0, S 1, TTL 1]
+15  62.115.139.34   AS1299   [ARELION-NET]    美国 纽约 纽约  arelion.com
+                                              244.92 ms / 243.97 ms / 245.20 ms
+    [MPLS: Lbl 402970, TC 0, S 1, TTL 1]
+16  62.115.139.245  AS1299   [ARELION-NET]    英国 英格兰 伦敦  arelion.com
+    ldn-bb1-link.ip.twelve99.net              254.98 ms / 254.45 ms / 254.90 ms
+    [MPLS: Lbl 402970, TC 0, S 1, TTL 1]
+17  62.115.122.189  AS1299   [ARELION-NET]    英国 英格兰 伦敦  arelion.com
+                                              233.88 ms / 233.50 ms / 234.72 ms
+18  62.115.168.19   AS1299   [ARELION-NET]    德国 黑森 美因河畔法兰克福  arelion.com
+                                              234.89 ms / 232.94 ms / 232.43 ms
+19  *
+20  *
+21  *
+22  *
+23  108.61.196.101  AS20473  [CONSTANT]       英国 英格兰 伦敦  vultr.com
+                                              296.21 ms / 289.21 ms / 288.58 ms

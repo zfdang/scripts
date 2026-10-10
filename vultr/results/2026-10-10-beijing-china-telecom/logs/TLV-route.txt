@@ -1,0 +1,42 @@
+$ /opt/homebrew/bin/nexttrace -4 -M -C -m 30 -q 3 --timeout 1000 64.176.162.16
+
+NextTrace 1.7.1 2026-06-16T02:54:57Z Homebrew
+[NextTrace API] preferred API IP - 103.117.102.27 - 177.97ms - DMIT.NRT
+IP Geo Data Provider: LeoMoeAPI
+[LAN_SOURCE] -> 64.176.162.16, 30 hops max, 28 byte packets, ICMP mode
+1   [LAN_GATEWAY]     *                         RFC1918
+                                              7.24 ms / 3.75 ms / 3.99 ms
+2   [CGNAT_GATEWAY]     *                         RFC6598
+                                              7.21 ms / 6.17 ms / 9.03 ms
+3   36.112.241.29   AS4847                    中国 北京市   中国电信  电信
+                                              7.11 ms / * ms / * ms
+4   *
+5   *
+6   *
+7   202.97.99.158   AS4134   [CHINANET-BB]    德国 黑森 美因河畔法兰克福  en.chinatelecom.com.cn  电信
+                                              165.97 ms / 165.53 ms / 170.03 ms
+8   80.81.192.191   AS8551   [DE-CIX]         德国 黑森州 美因河畔法兰克福 DE-CIX Frankfurt - Bezeq International - 100Gbps bezeqint.net
+                                              179.66 ms / 163.89 ms / * ms
+9   10.250.31.8     *                         RFC1918
+                                              222.13 ms / 222.26 ms / 221.49 ms
+    [MPLS: Lbl 3929, TC 0, S 0, TTL 1]
+    [MPLS: Lbl 5923, TC 0, S 1, TTL 1]
+10  62.219.189.2    AS8551                    巴勒斯坦 中央区 佩塔提克瓦  bezeqint.net
+                                              223.37 ms / 222.51 ms / * ms
+    [MPLS: Lbl 14543, TC 0, S 0, TTL 1]
+    [MPLS: Lbl 5923, TC 0, S 1, TTL 2]
+11  62.219.189.210  AS8551                    以色列 特拉维夫区 特拉维夫  bezeqint.net
+    bzq-219-189-210.cablep.bezeqint.net       227.27 ms / 227.19 ms / 226.41 ms
+    [MPLS: Lbl 5923, TC 0, S 1, TTL 1]
+12  10.250.3.6      *                         RFC1918
+                                              219.39 ms / 219.28 ms / 219.77 ms
+13  84.110.175.14   AS8551                    巴勒斯坦 特拉维夫区 特拉维夫  bezeqint.net
+                                              204.51 ms / * ms / * ms
+14  10.93.0.6       *                         RFC1918
+                                              216.91 ms / 217.43 ms / 216.95 ms
+15  10.93.0.78      *                         RFC1918
+                                              211.78 ms / 212.17 ms / 212.59 ms
+16  10.93.100.24    *                         RFC1918
+                                              221.89 ms / 222.46 ms / 221.23 ms
+17  64.176.162.16   AS20473                   巴勒斯坦 中央区 罗什艾因  vultr.com
+                                              212.50 ms / 213.59 ms / 211.82 ms

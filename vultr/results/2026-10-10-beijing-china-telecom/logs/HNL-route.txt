@@ -1,0 +1,36 @@
+$ /opt/homebrew/bin/nexttrace -4 -M -C -m 30 -q 3 --timeout 1000 208.72.154.76
+
+NextTrace 1.7.1 2026-06-16T02:54:57Z Homebrew
+[NextTrace API] preferred API IP - 45.131.71.225 - 176.85ms - DMIT.NRT
+IP Geo Data Provider: LeoMoeAPI
+[LAN_SOURCE] -> 208.72.154.76, 30 hops max, 28 byte packets, ICMP mode
+1   [LAN_GATEWAY]     *                         RFC1918
+                                              8.42 ms / 3.24 ms / 2.20 ms
+2   [CGNAT_GATEWAY]     *                         RFC6598
+                                              11.91 ms / 10.38 ms / 4.86 ms
+3   36.112.215.125  AS4847                    中国 北京市   中国电信  电信
+                                              5.82 ms / * ms / * ms
+4   106.37.254.101  AS4847   [CHINANET-HN]    中国 北京市   中国电信  电信
+                                              6.10 ms / * ms / * ms
+5   *
+6   202.97.54.66    AS4134   [CHINANET-BB]    中国 北京   en.chinatelecom.com.cn
+                                              9.40 ms / 9.31 ms / 16.93 ms
+7   202.97.51.193   AS4134   [CHINANET-BB]    美国 加利福尼亚 圣何塞  en.chinatelecom.com.cn  电信
+                                              225.90 ms / 181.43 ms / 148.08 ms
+8   *
+9   154.54.169.65   AS174    [COGENT-BONE]    美国 加利福尼亚 圣何塞  cogentco.com
+    be6016.ccr82.sjc13.atlas.cogentco.com     161.10 ms / 159.87 ms / 163.09 ms
+10  154.54.169.2    AS174    [COGENT-BONE]    美国 加利福尼亚 洛杉矶  cogentco.com
+    be5992.ccr42.lax01.atlas.cogentco.com     167.68 ms / 166.86 ms / 166.60 ms
+11  154.54.87.70    AS174    [COGENT-BONE]    美国 新墨西哥州 阿尔伯克基  cogentco.com
+                                              213.61 ms / 214.27 ms / 213.84 ms
+12  38.122.50.10    AS174                     美国 华盛顿哥伦比亚特区 华盛顿  cogentco.com
+                                              215.90 ms / 221.56 ms / 216.51 ms
+13  10.92.0.14      *                         RFC1918
+                                              232.91 ms / 231.52 ms / 226.72 ms
+14  169.254.1.1     *                         RFC3927
+                                              217.12 ms / 215.32 ms / 215.33 ms
+15  10.92.100.8     *                         RFC1918
+                                              213.61 ms / 214.96 ms / 216.02 ms
+16  208.72.154.76   AS20473                   美国 夏威夷州 怀梅阿  vultr.com
+                                              216.33 ms / 216.12 ms / 216.31 ms
