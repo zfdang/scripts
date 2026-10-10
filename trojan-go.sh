@@ -51,11 +51,15 @@ http://www.tjwl.com/
 
 ZIP_FILE="trojan-go"
 CONFIG_FILE="/etc/trojan-go/config.json"
+ACME_HOME="/root/.acme.sh"
+ACME_SH="$ACME_HOME/acme.sh"
 
 WS="false"
 
 colorEcho() {
-    echo -e "${1}${@:2}${PLAIN}"
+    local color=$1
+    shift
+    echo -e "${color}$*${PLAIN}"
 }
 
 checkSystem() {
@@ -398,57 +402,129 @@ stopNginx() {
     fi
 }
 
-getCert() {
-    mkdir -p /etc/trojan-go
-    if [[ -z ${CERT_FILE+x} ]]; then
-        stopNginx
-        systemctl stop trojan-go
-        sleep 2
-        res=`ss -ntlp| grep -E ':80 |:443 '`
-        if [[ "${res}" != "" ]]; then
-            echo -e "${RED} 其他进程占用了80或443端口，请先关闭再运行一键脚本${PLAIN}"
-            echo " 端口占用信息如下："
-            echo ${res}
-            exit 1
-        fi
+ensureCronService() {
+    local cron_service
+    if [[ "$PMT" = "yum" ]]; then
+        $CMD_INSTALL cronie || return 1
+        cron_service=crond
+    else
+        $CMD_INSTALL cron || return 1
+        cron_service=cron
+    fi
+    systemctl enable "$cron_service" || return 1
+    systemctl start "$cron_service" || return 1
+    systemctl is-active --quiet "$cron_service"
+}
 
-        $CMD_INSTALL socat openssl
-        if [[ "$PMT" = "yum" ]]; then
-            $CMD_INSTALL cronie
-            systemctl start crond
-            systemctl enable crond
-        else
-            $CMD_INSTALL cron
-            systemctl start cron
-            systemctl enable cron
+# acme.sh persists challenge hooks, deployment paths and reloadcmd per domain.
+setupCertRenewal() {
+    if [[ ! -f "$ACME_HOME/${DOMAIN}_ecc/${DOMAIN}.conf" ]]; then
+        colorEcho "$YELLOW" " 自备证书不受acme.sh管理，请配置签发方的自动续期和重启钩子。"
+        return 0
+    fi
+    [[ -x "$ACME_SH" ]] || return 1
+    ensureCronService || return 1
+    "$ACME_SH" --install-cronjob --home "$ACME_HOME" || return 1
+    # Verify installation instead of relying on the installer's success message.
+    crontab -l | grep -F -- "$ACME_HOME" | grep -q -- '--cron' || return 1
+
+    mkdir -p "$(dirname "$CERT_FILE")" "$(dirname "$KEY_FILE")" || return 1
+    touch "$KEY_FILE" || return 1
+    chmod 600 "$KEY_FILE" || return 1
+    "$ACME_SH" --install-cert -d "$DOMAIN" --ecc \
+        --home "$ACME_HOME" \
+        --key-file "$KEY_FILE" --fullchain-file "$CERT_FILE" \
+        --reloadcmd "systemctl restart trojan-go.service && systemctl is-active --quiet trojan-go.service" || return 1
+    colorEcho "$GREEN" " 自动续期已配置；证书更新后将重启trojan-go并检查服务状态。"
+}
+
+getCert() {
+    mkdir -p "$(dirname "$CONFIG_FILE")" || return 1
+    # A configured certificate is reused during reconfiguration, never overwritten.
+    if [[ -n "$CERT_FILE" && -n "$KEY_FILE" ]]; then
+        if [[ ! -s "$CERT_FILE" || ! -s "$KEY_FILE" ]]; then
+            [[ -s /root/trojan-go.pem && -s /root/trojan-go.key ]] || return 1
+            cp /root/trojan-go.pem "$CERT_FILE" || return 1
+            cp /root/trojan-go.key "$KEY_FILE" || return 1
         fi
-        curl -sL https://get.acme.sh | sh -s email=dantifer@gmail.com
-        source ~/.bashrc
-        ~/.acme.sh/acme.sh  --upgrade  --auto-upgrade
-        ~/.acme.sh/acme.sh --set-default-ca --server letsencrypt
+    else
+        # HTTP-01 standalone only requires port 80, not Trojan-Go's TLS port.
+        stopNginx
+        if ss -ntlp | grep -qE ':80[[:space:]]'; then
+            startNginx
+            colorEcho "$RED" " 其他进程占用了80端口，无法签发证书。"
+            return 1
+        fi
+        $CMD_INSTALL socat openssl || { startNginx; return 1; }
+        ensureCronService || { startNginx; return 1; }
+        if [[ ! -x "$ACME_SH" ]]; then
+            local installer
+            installer=$(mktemp) || { startNginx; return 1; }
+            if ! curl -fsSL https://get.acme.sh -o "$installer" ||
+                ! sh "$installer" email=dantifer@gmail.com; then
+                rm -f "$installer"
+                startNginx
+                return 1
+            fi
+            rm -f "$installer"
+        fi
+        "$ACME_SH" --upgrade --auto-upgrade || { startNginx; return 1; }
+        "$ACME_SH" --set-default-ca --server letsencrypt || { startNginx; return 1; }
+        local pre_hook post_hook issue_result
         if [[ "$BT" = "false" ]]; then
-            ~/.acme.sh/acme.sh   --issue -d $DOMAIN --keylength ec-256 --pre-hook "systemctl stop nginx" --post-hook "systemctl restart nginx"  --standalone
+            pre_hook="systemctl stop nginx"
+            post_hook="systemctl restart nginx"
         else
-            ~/.acme.sh/acme.sh   --issue -d $DOMAIN --keylength ec-256 --pre-hook "nginx -s stop || { echo -n ''; }" --post-hook "nginx -c /www/server/nginx/conf/nginx.conf || { echo -n ''; }"  --standalone
+            pre_hook="if [ -s /www/server/nginx/logs/nginx.pid ]; then nginx -s stop; fi"
+            post_hook="nginx -c /www/server/nginx/conf/nginx.conf"
         fi
-        [[ -f ~/.acme.sh/${DOMAIN}_ecc/ca.cer ]] || {
-            colorEcho $RED " 获取证书失败，请复制上面的红色文字到 https://hijk.art 反馈"
-            exit 1
-        }
+        "$ACME_SH" --issue -d "$DOMAIN" --keylength ec-256 \
+            --pre-hook "$pre_hook" --post-hook "$post_hook" --standalone
+        issue_result=$?
+        startNginx
+        # acme.sh returns 2 when an existing certificate is not due for renewal.
+        if [[ "$issue_result" != 0 && "$issue_result" != 2 ]]; then
+            colorEcho "$RED" " 获取证书失败，请检查acme.sh输出。"
+            return 1
+        fi
         CERT_FILE="/etc/trojan-go/${DOMAIN}.pem"
         KEY_FILE="/etc/trojan-go/${DOMAIN}.key"
-        ~/.acme.sh/acme.sh  --install-cert -d $DOMAIN --ecc \
-            --key-file       $KEY_FILE  \
-            --fullchain-file $CERT_FILE \
-            --reloadcmd     "systemctl restart trojan-go"
-        [[ -f $CERT_FILE && -f $KEY_FILE ]] || {
-            colorEcho $RED " 获取证书失败，请到 https://hijk.art 反馈"
-            exit 1
-        }
-    else
-        cp ~/trojan-go.pem /etc/trojan-go/${DOMAIN}.pem
-        cp ~/trojan-go.key /etc/trojan-go/${DOMAIN}.key
+        # Defer --install-cert/reloadcmd until the service and config are ready.
+        cp "$ACME_HOME/${DOMAIN}_ecc/fullchain.cer" "$CERT_FILE" || return 1
+        cp "$ACME_HOME/${DOMAIN}_ecc/${DOMAIN}.key" "$KEY_FILE" || return 1
     fi
+    chmod 600 "$KEY_FILE" || return 1
+    openssl x509 -in "$CERT_FILE" -noout -checkend 0 || return 1
+    local cert_public_key key_public_key
+    cert_public_key=$(openssl x509 -in "$CERT_FILE" -pubkey -noout) || return 1
+    key_public_key=$(openssl pkey -in "$KEY_FILE" -pubout) || return 1
+    [[ "$cert_public_key" = "$key_public_key" ]] || {
+        colorEcho "$RED" " 证书和私钥不匹配。"
+        return 1
+    }
+}
+
+# Read the paths actually used by the running installation.
+loadCertConfig() {
+    [[ -s "$CONFIG_FILE" ]] || return 1
+    DOMAIN=$(grep '"sni"' "$CONFIG_FILE" | cut -d\" -f4)
+    CERT_FILE=$(grep '"cert"' "$CONFIG_FILE" | cut -d\" -f4)
+    KEY_FILE=$(grep '"key"' "$CONFIG_FILE" | cut -d\" -f4)
+    [[ -n "$DOMAIN" && -n "$CERT_FILE" && -n "$KEY_FILE" ]]
+}
+
+renewCert() {
+    loadCertConfig || return 1
+    if [[ -z "$DOMAIN" || ! -f "$ACME_HOME/${DOMAIN}_ecc/${DOMAIN}.conf" ]]; then
+        colorEcho "$RED" " 未找到此域名的acme.sh ECC签发记录，无法自动续期自备证书。"
+        return 1
+    fi
+    configureTrojanService || return 1
+    setupCertRenewal || return 1
+    local result
+    "$ACME_SH" --renew -d "$DOMAIN" --ecc --home "$ACME_HOME"
+    result=$?
+    [[ "$result" = 0 || "$result" = 2 ]]
 }
 
 configNginx() {
@@ -552,13 +628,26 @@ downloadFile() {
     fi
 }
 
+configureTrojanService() {
+    mkdir -p /etc/systemd/system/trojan-go.service.d || return 1
+    cat > /etc/systemd/system/trojan-go.service.d/reload.conf <<'EOF' || return 1
+[Service]
+Restart=on-failure
+RestartSec=5s
+ExecReload=
+# Queue a restart: a blocking restart of this same unit would deadlock reload.
+ExecReload=/bin/systemctl --no-block restart trojan-go.service
+EOF
+    systemctl daemon-reload
+}
+
 installTrojan() {
     rm -rf /tmp/${ZIP_FILE}
-    unzip /tmp/${ZIP_FILE}.zip  -d /tmp/${ZIP_FILE}
-    cp /tmp/${ZIP_FILE}/trojan-go /usr/bin
-    cp /tmp/${ZIP_FILE}/example/trojan-go.service /etc/systemd/system/
+    unzip /tmp/${ZIP_FILE}.zip -d /tmp/${ZIP_FILE} || return 1
+    cp /tmp/${ZIP_FILE}/trojan-go /usr/bin || return 1
+    cp /tmp/${ZIP_FILE}/example/trojan-go.service /etc/systemd/system/ || return 1
     sed -i '/User=nobody/d' /etc/systemd/system/trojan-go.service
-    systemctl daemon-reload
+    configureTrojanService || return 1
 
     systemctl enable trojan-go
     rm -rf /tmp/${ZIP_FILE}
@@ -739,19 +828,20 @@ install() {
 
     installNginx
     setFirewall
-    getCert
+    getCert || { colorEcho "$RED" " 证书准备失败。"; return 1; }
     configNginx
 
     echo " 安装trojan-go..."
     getVersion
     downloadFile
-    installTrojan
-    configTrojan
+    installTrojan || return 1
+    configTrojan || return 1
 
     setSelinux
     installBBR
+    setupCertRenewal || { colorEcho "$RED" " 自动续期配置失败。"; return 1; }
 
-    start
+    start || return 1
     showInfo
 
     bbrReboot
@@ -778,7 +868,9 @@ update() {
     echo " 安装最新版trojan-go"
     getVersion
     downloadFile
-    installTrojan
+    installTrojan || return 1
+    loadCertConfig || return 1
+    setupCertRenewal || return 1
 
     stop
     start
@@ -815,7 +907,12 @@ uninstall() {
         fi
 
         rm -rf $NGINX_CONF_PATH${domain}.conf
-        ~/.acme.sh/acme.sh --uninstall
+        # Remove only this domain, preserving other certificates and cron jobs.
+        if [[ -x "$ACME_SH" && -f "$ACME_HOME/${domain}_ecc/${domain}.conf" ]]; then
+            "$ACME_SH" --remove -d "$domain" --ecc
+        fi
+        rm -rf /etc/systemd/system/trojan-go.service.d
+        systemctl daemon-reload
         echo -e " ${GREEN}trojan-go卸载成功${PLAIN}"
     fi
 }
@@ -828,13 +925,14 @@ start() {
     fi
 
     stopNginx
-    startNginx
-    systemctl restart trojan-go
+    startNginx || return 1
+    systemctl restart trojan-go || return 1
     sleep 2
     port=`grep local_port $CONFIG_FILE|cut -d: -f2| tr -d \",' '`
     res=`ss -ntlp| grep ${port} | grep trojan-go`
     if [[ "$res" = "" ]]; then
         colorEcho $RED " trojan-go启动失败，请检查端口是否被占用！"
+        return 1
     else
         colorEcho $BLUE " trojan-go启动成功"
     fi
@@ -869,12 +967,14 @@ reconfig() {
     line11=`expr $line1 + 1`
     WS=`sed -n "${line11}p" $CONFIG_FILE | cut -d: -f2 | tr -d \",' '`
     getData true
-    configTrojan
     setFirewall
-    getCert
+    getCert || { colorEcho "$RED" " 证书准备失败。"; return 1; }
+    configTrojan || return 1
     configNginx
+    configureTrojanService || return 1
+    setupCertRenewal || { colorEcho "$RED" " 自动续期配置失败。"; return 1; }
     stop
-    start
+    start || return 1
     showInfo
 
     bbrReboot
@@ -948,6 +1048,7 @@ menu() {
     echo -e "  ${GREEN}8.${PLAIN}  查看trojan-go配置"
     echo -e "  ${GREEN}9.  ${RED}修改trojan-go配置${PLAIN}"
     echo -e "  ${GREEN}10.${PLAIN} 查看trojan-go日志"
+    echo -e "  ${GREEN}11.${PLAIN} 修复自动续期并检查证书更新"
     echo " -------------"
     echo -e "  ${GREEN}0.${PLAIN} 退出"
     echo 
@@ -955,7 +1056,7 @@ menu() {
     statusText
     echo 
 
-    read -p " 请选择操作[0-10]：" answer
+    read -p " 请选择操作[0-11]：" answer
     case $answer in
         0)
             exit 0
@@ -991,6 +1092,9 @@ menu() {
         10)
             showLog
             ;;
+        11)
+            renewCert
+            ;;
         *)
             echo -e "$RED 请选择正确的操作！${PLAIN}"
             exit 1
@@ -1003,11 +1107,11 @@ checkSystem
 action=$1
 [[ -z $1 ]] && action=menu
 case "$action" in
-    menu|update|uninstall|start|restart|stop|showInfo|showLog)
+    menu|update|uninstall|start|restart|stop|showInfo|showLog|renewCert)
         ${action}
         ;;
     *)
         echo " 参数错误"
-        echo " 用法: `basename $0` [menu|update|uninstall|start|restart|stop|showInfo|showLog]"
+        echo " 用法: `basename $0` [menu|update|uninstall|start|restart|stop|showInfo|showLog|renewCert]"
         ;;
 esac
