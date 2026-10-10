@@ -1,0 +1,47 @@
+$ /opt/homebrew/bin/nexttrace -4 -M -C -m 30 -q 3 --timeout 1000 45.32.100.168
+
+NextTrace 1.7.1 2026-06-16T02:54:57Z Homebrew
+[NextTrace API] preferred API IP - 45.131.71.225 - 179.42ms - DMIT.NRT
+IP Geo Data Provider: LeoMoeAPI
+[LAN_SOURCE] -> 45.32.100.168, 30 hops max, 28 byte packets, ICMP mode
+1   [LAN_GATEWAY]     *                         RFC1918          
+                                              8.85 ms / 3.55 ms / 2.96 ms
+2   [CGNAT_GATEWAY]     *                         RFC6598          
+                                              53.84 ms / 5.89 ms / 8.99 ms
+3   *
+4   *
+5   202.97.34.74    AS4134   [CHINANET-BB]    中国 北京   en.chinatelecom.com.cn  电信
+                                              7.39 ms / 8.83 ms / * ms
+6   202.97.12.50    AS4134   [CHINANET-BB]    中国 北京   en.chinatelecom.com.cn  电信
+                                              8.22 ms / 8.41 ms / 11.24 ms
+7   202.97.59.142   AS4134   [CHINANET-BB]    美国 加利福尼亚 洛杉矶  en.chinatelecom.com.cn  电信
+                                              186.01 ms / 234.15 ms / * ms
+8   *
+9   62.115.140.156  AS1299   [ARELION-NET]    美国 加利福尼亚 洛杉矶  arelion.com 
+    lax-bb2-link.ip.twelve99.net              164.40 ms / 162.81 ms / 161.75 ms
+    [MPLS: Lbl 416160, TC 0, S 1, TTL 1]
+10  62.115.140.157  AS1299   [ARELION-NET]    美国 加利福尼亚 洛杉矶  arelion.com 
+    lax-b22-link.ip.twelve99.net              322.69 ms / 322.84 ms / 326.29 ms
+    [MPLS: Lbl 29131, TC 0, S 0, TTL 1]
+    [MPLS: Lbl 416160, TC 0, S 1, TTL 1]
+11  62.115.140.226  AS1299   [ARELION-NET]    美国 加利福尼亚 洛杉矶  arelion.com 
+    lax-bb1-link.ip.twelve99.net              343.25 ms / 342.54 ms / 341.78 ms
+    [MPLS: Lbl 25866, TC 0, S 0, TTL 1]
+    [MPLS: Lbl 416160, TC 0, S 1, TTL 2]
+12  62.115.138.253  AS1299   [ARELION-NET]    日本 东京都 东京  arelion.com 
+    tky-b4-link.ip.twelve99.net               328.90 ms / 330.04 ms / 330.32 ms
+    [MPLS: Lbl 26385, TC 0, S 0, TTL 1]
+    [MPLS: Lbl 416160, TC 0, S 1, TTL 3]
+13  62.115.136.142  AS1299   [ARELION-NET]    新加坡    arelion.com 
+                                              348.19 ms / 346.14 ms / 347.41 ms
+    [MPLS: Lbl 416160, TC 0, S 1, TTL 1]
+14  62.115.139.1    AS1299   [ARELION-NET]    新加坡    arelion.com 
+                                              330.81 ms / * ms / * ms
+15  213.248.74.73   AS1299   [TELIANET]       美国 亚利桑那州 凤凰城  arelion.com 
+    constantcompany-ic-379815.ip.twelve99-cust.net   270.16 ms / * ms / * ms
+16  *
+17  *
+18  45.32.98.222    AS20473                   新加坡    vultr.com 
+                                              266.91 ms / * ms / * ms
+19  45.32.100.168   AS20473                   新加坡    vultr.com 
+                                              279.88 ms / 274.57 ms / * ms

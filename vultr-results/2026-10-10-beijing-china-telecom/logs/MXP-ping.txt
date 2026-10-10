@@ -1,0 +1,10 @@
+$ /sbin/ping -n -c 3 -W 1000 66.245.203.234
+
+PING 66.245.203.234 (66.245.203.234): 56 data bytes
+Request timeout for icmp_seq 0
+64 bytes from 66.245.203.234: icmp_seq=1 ttl=47 time=321.261 ms
+64 bytes from 66.245.203.234: icmp_seq=2 ttl=47 time=237.659 ms
+
+--- 66.245.203.234 ping statistics ---
+3 packets transmitted, 2 packets received, 33.3% packet loss
+round-trip min/avg/max/stddev = 237.659/279.460/321.261/41.801 ms

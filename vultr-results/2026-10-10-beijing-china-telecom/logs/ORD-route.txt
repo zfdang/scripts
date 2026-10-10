@@ -1,0 +1,40 @@
+$ /opt/homebrew/bin/nexttrace -4 -M -C -m 30 -q 3 --timeout 1000 107.191.51.12
+
+NextTrace 1.7.1 2026-06-16T02:54:57Z Homebrew
+[NextTrace API] preferred API IP - 185.218.7.242 - 183.69ms - DMIT.NRT
+IP Geo Data Provider: LeoMoeAPI
+[LAN_SOURCE] -> 107.191.51.12, 30 hops max, 28 byte packets, ICMP mode
+1   [LAN_GATEWAY]     *                         RFC1918          
+                                              6.49 ms / 3.91 ms / 3.25 ms
+2   [CGNAT_GATEWAY]     *                         RFC6598          
+                                              7.11 ms / 10.15 ms / 5.62 ms
+3   *
+4   *
+5   202.97.94.230   AS4134   [CHINANET-BB]    中国 北京   en.chinatelecom.com.cn  电信
+                                              20.83 ms / 21.59 ms / 22.13 ms
+6   202.97.53.66    AS4134   [CHINANET-BB]    中国 北京   en.chinatelecom.com.cn  电信
+                                              8.30 ms / 8.50 ms / 8.28 ms
+7   202.97.52.90    AS4134   [CHINANET-BB]    美国 加利福尼亚 圣何塞  en.chinatelecom.com.cn  电信
+                                              162.56 ms / 162.98 ms / 162.82 ms
+8   *
+9   62.115.139.16   AS1299   [ARELION-NET]    美国 加利福尼亚 圣何塞  arelion.com 
+    sjo-bb3-link.ip.twelve99.net              168.67 ms / 167.65 ms / * ms
+    [MPLS: Lbl 404170, TC 0, S 1, TTL 1]
+10  62.115.139.105  AS1299   [ARELION-NET]    美国 科罗拉多 丹佛  arelion.com 
+    den-bb1-link.ip.twelve99.net              216.46 ms / 216.19 ms / 216.56 ms
+    [MPLS: Lbl 404170, TC 0, S 1, TTL 1]
+11  62.115.115.77   AS1299   [ARELION-NET]    美国 伊利诺伊 芝加哥  arelion.com 
+    chi-bb1-link.ip.twelve99.net              216.49 ms / 216.01 ms / 216.02 ms
+    [MPLS: Lbl 404170, TC 0, S 1, TTL 1]
+12  62.115.140.109  AS1299   [ARELION-NET]    美国 伊利诺伊 芝加哥  arelion.com 
+    chi-b23-link.ip.twelve99.net              217.34 ms / * ms / * ms
+13  80.239.160.17   AS1299                    美国 伊利诺伊州 芝加哥  arelion.com 
+                                              239.47 ms / 238.78 ms / * ms
+14  *
+15  *
+16  *
+17  *
+18  108.61.101.36   AS20473  [CONSTANT]       美国 伊利诺伊州 埃尔克格罗夫村  vultr.com 
+                                              259.02 ms / 258.70 ms / 258.73 ms
+19  107.191.51.12   AS20473  [NET-107]        美国 伊利诺伊州 埃尔克格罗夫村  vultr.com 
+                                              238.73 ms / 237.77 ms / 239.84 ms

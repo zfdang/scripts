@@ -1,0 +1,33 @@
+$ /opt/homebrew/bin/nexttrace -4 -M -C -m 30 -q 3 --timeout 1000 108.61.194.105
+
+NextTrace 1.7.1 2026-06-16T02:54:57Z Homebrew
+[NextTrace API] preferred API IP - 45.131.71.225 - 174.27ms - DMIT.NRT
+IP Geo Data Provider: LeoMoeAPI
+[LAN_SOURCE] -> 108.61.194.105, 30 hops max, 28 byte packets, ICMP mode
+1   [LAN_GATEWAY]     *                         RFC1918          
+                                              5.50 ms / 2.53 ms / 2.50 ms
+2   [CGNAT_GATEWAY]     *                         RFC6598          
+                                              8.08 ms / 8.37 ms / 6.47 ms
+3   *
+4   *
+5   202.97.61.166   AS4134   [CHINANET-BB]    中国 北京   en.chinatelecom.com.cn  电信
+                                              8.68 ms / * ms / * ms
+6   *
+7   202.97.51.193   AS4134   [CHINANET-BB]    美国 加利福尼亚 圣何塞  en.chinatelecom.com.cn  电信
+                                              384.08 ms / 342.78 ms / 299.72 ms
+8   218.30.54.182   AS4134   [CHINANET-US]    美国 加利福尼亚 圣何塞 CT-Telia-PoP en.chinatelecom.com.cn  电信
+                                              157.82 ms / 158.16 ms / * ms
+9   62.115.139.16   AS1299   [ARELION-NET]    美国 加利福尼亚 圣何塞  arelion.com 
+    sjo-bb3-link.ip.twelve99.net              153.26 ms / 151.67 ms / 159.44 ms
+    [MPLS: Lbl 415560, TC 0, S 1, TTL 1]
+10  62.115.132.153  AS1299   [ARELION-NET]    美国 华盛顿 西雅图  arelion.com 
+                                              166.18 ms / 166.50 ms / 165.94 ms
+11  213.248.100.133 AS1299   [TELIANET]       美国 华盛顿州 西雅图  arelion.com 
+                                              171.66 ms / 171.29 ms / 171.83 ms
+12  *
+13  *
+14  *
+15  45.63.33.239    AS20473                   美国 华盛顿州 肯特  vultr.com 
+                                              289.71 ms / 293.08 ms / 295.94 ms
+16  108.61.194.105  AS20473  [CONSTANT]       美国 华盛顿州 西雅图  vultr.com 
+                                              239.72 ms / 239.74 ms / 240.40 ms

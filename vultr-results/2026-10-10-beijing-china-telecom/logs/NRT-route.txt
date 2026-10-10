@@ -1,0 +1,24 @@
+$ /opt/homebrew/bin/nexttrace -4 -M -C -m 30 -q 3 --timeout 1000 108.61.201.151
+
+NextTrace 1.7.1 2026-06-16T02:54:57Z Homebrew
+[NextTrace API] preferred API IP - 45.88.195.154 - 182.65ms - DMIT.NRT
+IP Geo Data Provider: LeoMoeAPI
+[LAN_SOURCE] -> 108.61.201.151, 30 hops max, 28 byte packets, ICMP mode
+1   [LAN_GATEWAY]     *                         RFC1918          
+                                              11.31 ms / 3.65 ms / 3.51 ms
+2   [CGNAT_GATEWAY]     *                         RFC6598          
+                                              5.87 ms / 41.15 ms / 5.37 ms
+3   *
+4   *
+5   *
+6   *
+7   203.215.237.138 *        [CHINANET-FJ]    中国 福建省 厦门市   电信   
+                                              118.84 ms / * ms / * ms
+8   120.88.54.98    AS2914   [APNIC-AP]       日本 东京都 东京  gin.ntt.net 
+    ce-3-5-3.a01.tokyjp09.jp.ce.gin.ntt.net   113.87 ms / 114.36 ms / * ms
+9   *
+10  *
+11  209.222.31.145  AS20473                   日本 埼玉县   vultr.com 
+                                              133.56 ms / 133.83 ms / 134.51 ms
+12  108.61.201.151  AS20473  [CONSTANT]       日本 东京都 东京  vultr.com 
+                                              119.92 ms / 118.31 ms / 116.99 ms

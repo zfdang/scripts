@@ -54,3 +54,9 @@ python3 vultr-test.py --count 10 --trace-timeout 120
 
 NextTrace 默认可能访问其 GeoIP 服务。VPN、代理的 TUN 模式和系统路由都会
 影响实际探测出口。本脚本测量的是本机到节点的去程和往返延迟，不是机房回程。
+
+## 已公开的实测结果
+
+[2026-10-10 北京中国电信宽带实测](vultr-results/2026-10-10-beijing-china-telecom/README.md)
+包含测试条件、33 个机房的延迟和丢包汇总，以及逐跳路由日志。此记录使用每节点
+3 次 ping、30 秒路由总超时，是一次实测快照，不代表其他地区、运营商或时段。

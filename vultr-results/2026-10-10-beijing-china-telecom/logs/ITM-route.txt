@@ -1,0 +1,35 @@
+$ /opt/homebrew/bin/nexttrace -4 -M -C -m 30 -q 3 --timeout 1000 64.176.34.94
+
+NextTrace 1.7.1 2026-06-16T02:54:57Z Homebrew
+[NextTrace API] preferred API IP - 45.88.195.154 - 184.69ms - DMIT.NRT
+IP Geo Data Provider: LeoMoeAPI
+[LAN_SOURCE] -> 64.176.34.94, 30 hops max, 28 byte packets, ICMP mode
+1   [LAN_GATEWAY]     *                         RFC1918          
+                                              7.75 ms / 3.50 ms / 2.45 ms
+2   [CGNAT_GATEWAY]     *                         RFC6598          
+                                              16.39 ms / 28.55 ms / 5.33 ms
+3   36.112.226.41   AS4847                    中国 北京市   中国电信  电信
+                                              7.41 ms / * ms / * ms
+4   *
+5   202.97.94.230   AS4134   [CHINANET-BB]    中国 北京   en.chinatelecom.com.cn  电信
+                                              21.51 ms / 23.88 ms / * ms
+6   202.97.12.114   AS4134   [CHINANET-BB]    中国 北京   en.chinatelecom.com.cn  电信
+                                              9.12 ms / 9.22 ms / * ms
+7   202.97.116.10   AS4134   [CHINANET-BB]    中国 香港   en.chinatelecom.com.cn 
+                                              40.73 ms / 42.40 ms / 41.27 ms
+8   203.22.178.201  *        [CTG-CN]         中国 香港         
+                                              45.77 ms / 45.41 ms / 45.43 ms
+9   62.115.186.192  AS1299   [ARELION-NET]    中国 香港   arelion.com 
+                                              188.74 ms / 192.89 ms / 189.75 ms
+10  62.115.142.67   AS1299   [ARELION-NET]    中国 香港   arelion.com 
+                                              174.92 ms / 174.61 ms / 174.95 ms
+    [MPLS: Lbl 403430, TC 0, S 1, TTL 1]
+11  62.115.141.247  AS1299   [ARELION-NET]    日本 大阪府 大阪  arelion.com 
+    osa-b2-link.ip.twelve99.net               185.31 ms / 184.73 ms / 184.02 ms
+12  62.115.9.35     AS1299   [ARELION-NET]    日本 大阪府 大阪  arelion.com 
+    constantcompany-ic-377584.ip.twelve99-cust.net   186.05 ms / 179.60 ms / 179.55 ms
+13  *
+14  *
+15  *
+16  64.176.34.94    AS20473                   日本 大阪府 大阪  vultr.com 
+    64.176.34.94.vultrusercontent.com         242.20 ms / 242.68 ms / 241.21 ms

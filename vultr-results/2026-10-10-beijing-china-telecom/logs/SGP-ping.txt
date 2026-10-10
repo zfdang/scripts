@@ -1,0 +1,8 @@
+$ /sbin/ping -n -c 3 -W 1000 45.32.100.168
+
+PING 45.32.100.168 (45.32.100.168): 56 data bytes
+Request timeout for icmp_seq 0
+Request timeout for icmp_seq 1
+
+--- 45.32.100.168 ping statistics ---
+3 packets transmitted, 0 packets received, 100.0% packet loss

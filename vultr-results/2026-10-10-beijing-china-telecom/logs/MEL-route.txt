@@ -1,0 +1,35 @@
+$ /opt/homebrew/bin/nexttrace -4 -M -C -m 30 -q 3 --timeout 1000 67.219.110.24
+
+NextTrace 1.7.1 2026-06-16T02:54:57Z Homebrew
+[NextTrace API] preferred API IP - 103.117.102.27 - 180.66ms - DMIT.NRT
+IP Geo Data Provider: LeoMoeAPI
+[LAN_SOURCE] -> 67.219.110.24, 30 hops max, 28 byte packets, ICMP mode
+1   [LAN_GATEWAY]     *                         RFC1918          
+                                              11.43 ms / 2.93 ms / 3.31 ms
+2   [CGNAT_GATEWAY]     *                         RFC6598          
+                                              7.27 ms / 7.23 ms / 7.67 ms
+3   *
+4   *
+5   *
+6   *
+7   202.97.39.201   AS4134   [CHINANET-BB]    中国 上海   en.chinatelecom.com.cn  电信
+                                              26.55 ms / * ms / * ms
+8   202.97.89.154   AS4134   [CHINANET-BB]    新加坡    en.chinatelecom.com.cn  电信
+                                              90.30 ms / * ms / * ms
+9   183.91.56.122   AS4134   [APNIC-AP]       新加坡    en.chinatelecom.com.cn  电信
+                                              159.98 ms / 161.97 ms / * ms
+10  *
+11  *
+12  *
+13  *
+14  129.250.2.57    AS2914   [NTT-BACKBONE]   澳大利亚 新南威尔士州 悉尼  gin.ntt.net 
+                                              297.98 ms / * ms / * ms
+15  103.13.80.143   AS2914                    澳大利亚 新南威尔士州 悉尼  gin.ntt.net 
+                                              372.12 ms / 372.68 ms / 370.92 ms
+16  *
+17  *
+18  *
+19  *
+20  *
+21  67.219.110.24   AS20473                   澳大利亚 维多利亚省 墨尔本  vultr.com 
+                                              316.37 ms / 318.70 ms / 321.34 ms
