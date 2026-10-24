@@ -654,10 +654,21 @@ EOF
     systemctl daemon-reload
 }
 
+replaceTrojanBinary() {
+    local source=$1 target=${2:-/usr/bin/trojan-go} staged
+    # Stage beside the destination so rename is atomic, even while it is running.
+    staged=$(mktemp "${target}.XXXXXX") || return 1
+    if ! cp "$source" "$staged" || ! chmod 755 "$staged" ||
+        ! mv -f "$staged" "$target"; then
+        rm -f "$staged"
+        return 1
+    fi
+}
+
 installTrojan() {
     rm -rf /tmp/${ZIP_FILE}
     unzip /tmp/${ZIP_FILE}.zip -d /tmp/${ZIP_FILE} || return 1
-    cp /tmp/${ZIP_FILE}/trojan-go /usr/bin || return 1
+    replaceTrojanBinary "/tmp/${ZIP_FILE}/trojan-go" || return 1
     cp /tmp/${ZIP_FILE}/example/trojan-go.service /etc/systemd/system/ || return 1
     sed -i '/User=nobody/d' /etc/systemd/system/trojan-go.service
     configureTrojanService || return 1
