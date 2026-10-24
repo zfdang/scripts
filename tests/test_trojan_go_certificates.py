@@ -149,5 +149,36 @@ getCert
         self.assertFalse((self.root / "acme.log").exists())
 
 
+class NginxProxyUrlTests(unittest.TestCase):
+    def run_shell(self, command, url):
+        return subprocess.run(
+            ["bash", "-c", FUNCTIONS + '\ncolorEcho() { :; }\n' + command],
+            text=True, capture_output=True,
+            env={**os.environ, "PROXY_URL": url},
+        )
+
+    def test_valid_proxy_urls(self):
+        for url in ("https://blog.zfdang.com", "http://example.com/",
+                    "https://example.com:8443/path?a=1&b=2", "http://127.0.0.1:8080",
+                    "http://[::1]:8080/"):
+            with self.subTest(url=url):
+                self.assertEqual(self.run_shell('validateProxyUrl "$PROXY_URL"', url).returncode, 0)
+
+    def test_malformed_or_unsafe_proxy_urls(self):
+        for url in ("https:/blog.zfdang.com", "httpwhatever", "https://",
+                    "ftp://example.com", "https://example.com;", "https://example.com/\nfoo",
+                    'https://example.com/"', "https://example.com/$host"):
+            with self.subTest(url=url):
+                self.assertNotEqual(self.run_shell('validateProxyUrl "$PROXY_URL"', url).returncode, 0)
+
+    def test_invalid_url_aborts_before_writing_nginx_configuration(self):
+        result = self.run_shell('''
+mkdir() { echo unexpected-write >&2; return 1; }
+configNginx
+''', "https:/blog.zfdang.com")
+        self.assertNotEqual(result.returncode, 0)
+        self.assertNotIn("unexpected-write", result.stderr)
+
+
 if __name__ == "__main__":
     unittest.main()

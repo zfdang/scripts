@@ -174,6 +174,15 @@ archAffix() {
 	return 0
 }
 
+validateProxyUrl() {
+    # Require a complete HTTP(S) URL that can be safely used in nginx directives.
+    local url=$1
+    [[ "$url" =~ ^https?://(\[[0-9a-fA-F:]+\]|[a-zA-Z0-9]([a-zA-Z0-9.-]*[a-zA-Z0-9])?)(:[0-9]{1,5})?([/?].*)?$ ]] || return 1
+    case "$url" in
+        *[[:space:]]*|*\;*|*\{*|*\}*|*\"*|*\'*|*\\*|*\$*|*\#*) return 1 ;;
+    esac
+}
+
 getData() {
     echo ""
     can_change=$1
@@ -316,8 +325,8 @@ getData() {
             if [[ -z "$PROXY_URL" ]]; then
                 colorEcho $RED " 请输入反代网站！"
                 exit 1
-            elif [[ "${PROXY_URL:0:4}" != "http" ]]; then
-                colorEcho $RED " 反代网站必须以http或https开头！"
+            elif ! validateProxyUrl "$PROXY_URL"; then
+                colorEcho $RED " 反代网站必须是完整的http://或https://网址，例如https://blog.zfdang.com！"
                 exit 1
             fi
             ;;
@@ -528,6 +537,10 @@ renewCert() {
 }
 
 configNginx() {
+    if [[ -n "$PROXY_URL" ]] && ! validateProxyUrl "$PROXY_URL"; then
+        colorEcho "$RED" " 反代网址无效，未修改Nginx配置：$PROXY_URL"
+        return 1
+    fi
     mkdir -p /usr/share/nginx/html
     if [[ "$ALLOW_SPIDER" = "n" ]]; then
         echo 'User-Agent: *' > /usr/share/nginx/html/robots.txt
@@ -829,7 +842,7 @@ install() {
     installNginx
     setFirewall
     getCert || { colorEcho "$RED" " 证书准备失败。"; return 1; }
-    configNginx
+    configNginx || return 1
 
     echo " 安装trojan-go..."
     getVersion
@@ -970,7 +983,7 @@ reconfig() {
     setFirewall
     getCert || { colorEcho "$RED" " 证书准备失败。"; return 1; }
     configTrojan || return 1
-    configNginx
+    configNginx || return 1
     configureTrojanService || return 1
     setupCertRenewal || { colorEcho "$RED" " 自动续期配置失败。"; return 1; }
     stop
