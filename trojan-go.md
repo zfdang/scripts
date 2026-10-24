@@ -40,6 +40,20 @@ openssl x509 -in /etc/trojan-go/你的域名.pem -noout -dates
 部署成功后执行 `systemctl restart trojan-go.service`。`renewCert` 对没有
 acme.sh ECC 签发记录的域名会明确报错。
 
+## Nginx 启动失败
+
+若证书部署显示成功，但随后出现 `nginx.service failed`，先检查：
+
+```bash
+nginx -t
+journalctl -u nginx -n 50 --no-pager
+```
+
+`invalid URL prefix` 表示反代网址格式错误。例如 `https:/blog.zfdang.com`
+少了一个 `/`，应为 `https://blog.zfdang.com`。备份并修正对应的
+`/etc/nginx/conf.d/域名.conf` 后，执行 `nginx -t && systemctl start nginx`。
+脚本现在会在收集输入和写入配置前校验反代网址，拒绝此类错误。
+
 ## 验证脚本
 
 本地测试不安装软件、不操作真实 systemd 服务、不申请公网证书：
