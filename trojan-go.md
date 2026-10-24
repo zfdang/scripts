@@ -59,7 +59,12 @@ journalctl -u nginx -n 50 --no-pager
 本地测试不安装软件、不操作真实 systemd 服务、不申请公网证书：
 
 ```bash
-PYTHONDONTWRITEBYTECODE=1 python3 -m unittest discover -s tests -p 'test_trojan_go_certificates.py' -v
+PYTHONDONTWRITEBYTECODE=1 python3 -m unittest discover -s tests -p 'test_trojan_go*.py' -v
 bash -n trojan-go.sh
 shellcheck --severity=error trojan-go.sh
 ```
+
+程序替换测试需要 C 编译器（`cc`），用于构建临时的运行中程序。
+重装或更新时，脚本将新程序写入 `/usr/bin` 下的临时文件，再原子替换
+`/usr/bin/trojan-go`，避免直接覆盖运行中程序产生 `Text file busy`。
+替换失败会清理临时文件并保留旧程序；成功后由安装或更新流程重启服务。
